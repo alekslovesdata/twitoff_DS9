@@ -8,7 +8,6 @@ verify_ssl = true
 [packages]
 flask = "*"
 jinja2 = "*"
-basilica = "*"
 tweepy = "*"
 redis = "*"
 psycopg2 = "*"
@@ -17,6 +16,7 @@ gunicorn = "*"
 scikit-learn = "*"
 python-dotenv = "*"
 python-decouple = "*"
+basilica = "==0.2.6"
 
 [requires]
 python_version = "3.7"

@@ -4,6 +4,8 @@ from decouple import config
 from flask import Flask, render_template, request
 from .models import DB, User
 
+from .twitter import add_or_update_user
+
 #make our app factory
 
 def create_app():
@@ -28,5 +30,18 @@ def create_app():
         DB.drop_all()
         DB.create_all()
         return render_template('base.html', title = 'Reset', users=[])
+
+    @app.route('/user',methods=['POST'])
+    @app.route('/user/<name>',methods=['GET'])
+    def user(name=None, message=''):
+        try:
+            if request.method == 'POST':
+                add_or_update_user(name)
+                message = "User {} succesfully added".format(name)
+            tweets = User.query.filter(User.name == name).one().tweets
+        except Exception as e:
+            pass
+
+
 
     return app
