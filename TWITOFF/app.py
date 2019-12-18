@@ -38,11 +38,12 @@ def create_app():
         try:
             if request.method == 'POST':
                 add_or_update_user(name)
-                message = "User {} succesfully added".format(name)
+                message = "User {} successfully added".format(name)
             tweets = User.query.filter(User.name == name).one().tweets
         except Exception as e:
             message = "Error adding {}: {}".format(name,e)
             tweets = []
-        return render_template('user.html')
+        return render_template('user.html', title=name, tweets=tweets,
+        message=message)
 
     return app
